@@ -6,7 +6,7 @@
 #define UNTITLED_JOB_H
 
 struct job{
-    int printerId;
+    char printerId[16];
     int pages;
     int priority;
 };
