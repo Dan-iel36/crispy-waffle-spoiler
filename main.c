@@ -54,6 +54,7 @@ void* jobForwarder(struct job* myjob){
         //breakout of loop
 
     //}
+close(sock);
     return NULL;
 }
 
@@ -82,6 +83,7 @@ void* treatJobWithAThread(void* arg){
     jobForwarder(buffer);
 
     free(buffer);
+    //close(sock);
     return NULL;
 }
 
@@ -147,6 +149,7 @@ int main() {
             memcpy(buffer_copy, buffer, sizeof(struct job));
 
             pthread_create(&thread_id, NULL, treatJobWithAThread, buffer_copy);
+            //pthread_join(thread_id, NULL);
 
             printf("Received: Printer ID: %s, Pages: %d, Priority: %d, ThreadInCharge: %lu \n", buffer->printerId, buffer->pages, buffer->priority,  (unsigned long int) thread_id);
 
